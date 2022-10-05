@@ -11,4 +11,9 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene("Level" + StaticTracker.level);
     }
+    public void PlayDLC()
+    {
+        StaticTracker.reset();
+        SceneManager.LoadScene("DLCLevel" + StaticTracker.level);
+    }
 }
