@@ -139,6 +139,12 @@ public class Player1 : MonoBehaviour
             playerHurtAudio.Play();
             animator.SetBool("IsHurt", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+5);
+        } 
+        else if (collision.collider.gameObject.tag == "Lava")
+        {
+            health-=3;
+            playerHurtAudio.Play();
+            animator.SetBool("IsHurt", true);
         } else if (collision.collider.gameObject.tag == "EnemyBullet")
         {
             health-=collision.collider.gameObject.GetComponent<EnemyBullet>().damage;
