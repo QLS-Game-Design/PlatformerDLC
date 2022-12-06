@@ -13,6 +13,7 @@ public class Player1 : MonoBehaviour
     public LayerMask mapLayer;
 
     public float speed = 5f;
+    public float speedY = 1f;
     public float maxHealth = 10f;
     public float health;
     public float jumpForce = 6f;
@@ -68,7 +69,7 @@ public class Player1 : MonoBehaviour
         }
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
-        rb.velocity = new Vector2(horizontalMove, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalMove, rb.velocity.y*speedY);
 
         // // basic jumping
         // if (Input.GetButtonDown("Jump") && onGround)
@@ -197,6 +198,7 @@ public class Player1 : MonoBehaviour
         if (collision.gameObject.tag == "Web")
         {
             speed = 2f;
+            speedY = 0.97f;
 
         }
     }
@@ -205,6 +207,7 @@ public class Player1 : MonoBehaviour
         if (collision.gameObject.tag == "Web")
         {
             speed = 5f;
+            speedY=1f;
         }
     }
 
