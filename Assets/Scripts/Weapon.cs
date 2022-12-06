@@ -151,5 +151,6 @@ public class Weapon : MonoBehaviour
         } else {
             weaponSprite = grenadeSprite;
         }
+        
     }
 }
