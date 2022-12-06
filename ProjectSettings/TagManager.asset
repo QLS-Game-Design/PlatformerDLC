@@ -15,6 +15,7 @@ TagManager:
   - Grenade
   - LevelLoader
   - Lava
+  - Web
   layers:
   - Default
   - TransparentFX

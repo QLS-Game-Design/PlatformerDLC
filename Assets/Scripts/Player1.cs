@@ -23,7 +23,6 @@ public class Player1 : MonoBehaviour
     private bool jumpQueued = false;
     public float coins = 0;
 
-
     // for weapon attacks
     private float deathDuration = 3f;
     private float punchDistance = 0.2f;
@@ -108,17 +107,16 @@ public class Player1 : MonoBehaviour
         //}
 
 
-
         // Slower gravity while climbing
-        if (Physics2D.Raycast(detector.position, Vector2.right, wallDetectDistance, mapLayer) == true || Physics2D.Raycast(detector.position, Vector2.left, 2*wallDetectDistance, mapLayer) == true){
-            if (GetComponent<Rigidbody2D>().velocity.y < 0){
+            if (Physics2D.Raycast(detector.position, Vector2.right, wallDetectDistance, mapLayer) == true || Physics2D.Raycast(detector.position, Vector2.left, 2*wallDetectDistance, mapLayer) == true){
+                if (GetComponent<Rigidbody2D>().velocity.y < 0){
                 GetComponent<Rigidbody2D>().gravityScale = gravityWhileClimb;
-            } else {
+                } else {
                 GetComponent<Rigidbody2D>().gravityScale = 1.3f;
-            }
-        } else {
+                }
+            } else {
             GetComponent<Rigidbody2D>().gravityScale = 1;
-        }
+            }
 
         
     }
@@ -196,7 +194,20 @@ public class Player1 : MonoBehaviour
             Destroy(collision.GetComponent<Collider2D>().gameObject);
             CoinsUI.GetComponent<Text>().text = coins.ToString();
         }
+        if (collision.gameObject.tag == "Web")
+        {
+            speed = 2f;
+
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Web")
+        {
+            speed = 5f;
+        }
+    }
+
     IEnumerator Die()
 	{
         Debug.Log("died");
