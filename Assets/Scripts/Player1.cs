@@ -13,6 +13,7 @@ public class Player1 : MonoBehaviour
     public LayerMask mapLayer;
 
     public float speed = 5f;
+    public float speedY = 1f;
     public float maxHealth = 10f;
     public float health;
     public float jumpForce = 6f;
@@ -22,7 +23,6 @@ public class Player1 : MonoBehaviour
     private float timeFromLastJump = 0f;
     private bool jumpQueued = false;
     public float coins = 0;
-
 
     // for weapon attacks
     private float deathDuration = 3f;
@@ -69,7 +69,7 @@ public class Player1 : MonoBehaviour
         }
         animator.SetFloat("speed", Mathf.Abs(horizontalMove));
 
-        rb.velocity = new Vector2(horizontalMove, rb.velocity.y);
+        rb.velocity = new Vector2(horizontalMove, rb.velocity.y*speedY);
 
         // // basic jumping
         // if (Input.GetButtonDown("Jump") && onGround)
@@ -108,17 +108,16 @@ public class Player1 : MonoBehaviour
         //}
 
 
-
         // Slower gravity while climbing
-        if (Physics2D.Raycast(detector.position, Vector2.right, wallDetectDistance, mapLayer) == true || Physics2D.Raycast(detector.position, Vector2.left, 2*wallDetectDistance, mapLayer) == true){
-            if (GetComponent<Rigidbody2D>().velocity.y < 0){
+            if (Physics2D.Raycast(detector.position, Vector2.right, wallDetectDistance, mapLayer) == true || Physics2D.Raycast(detector.position, Vector2.left, 2*wallDetectDistance, mapLayer) == true){
+                if (GetComponent<Rigidbody2D>().velocity.y < 0){
                 GetComponent<Rigidbody2D>().gravityScale = gravityWhileClimb;
-            } else {
+                } else {
                 GetComponent<Rigidbody2D>().gravityScale = 1.3f;
-            }
-        } else {
+                }
+            } else {
             GetComponent<Rigidbody2D>().gravityScale = 1;
-        }
+            }
 
         
     }
@@ -196,7 +195,22 @@ public class Player1 : MonoBehaviour
             Destroy(collision.GetComponent<Collider2D>().gameObject);
             CoinsUI.GetComponent<Text>().text = coins.ToString();
         }
+        if (collision.gameObject.tag == "Web")
+        {
+            speed = 2f;
+            speedY = 0.97f;
+
+        }
     }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Web")
+        {
+            speed = 5f;
+            speedY=1f;
+        }
+    }
+
     IEnumerator Die()
 	{
         Debug.Log("died");

@@ -20121,6 +20121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 8986878547892916229, guid: 68dcafe287d4aac4bbba0c139f517771, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8986878547892916230, guid: 68dcafe287d4aac4bbba0c139f517771, type: 3}
       propertyPath: m_RootOrder
       value: 7
