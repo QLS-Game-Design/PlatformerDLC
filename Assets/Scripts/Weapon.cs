@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
     Sprite weaponSprite;
     public Sprite gunSprite;
     public Sprite grenadeSprite;
-
+    
     public AudioSource gunFireAudio;
     public AudioSource grenadeFireAudio;
 
