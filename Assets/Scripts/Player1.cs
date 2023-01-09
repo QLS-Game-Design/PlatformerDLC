@@ -89,7 +89,16 @@ public class Player1 : MonoBehaviour
         }
         if (onGround && timeFromLastJump < 0.2 && jumpQueued)
         {
-           rb.velocity = Vector2.up * jumpForce;
+            //print("JUMPING: " + transform.rotation.z);
+           if (transform.rotation.z == -1)
+            {
+                rb.velocity = Vector2.down * jumpForce;
+            } else
+            {
+                rb.velocity = Vector2.up * jumpForce;
+            }
+           //rb.velocity = Vector2.up * jumpForce;
+           
            jumpQueued = false;
         }
 
@@ -178,6 +187,7 @@ public class Player1 : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (health <= 0)
         {
             return;
@@ -197,6 +207,7 @@ public class Player1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "Web")
         {
+            
             speed = 2f;
             speedY = 0.97f;
 
@@ -216,6 +227,7 @@ public class Player1 : MonoBehaviour
         Debug.Log("died");
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(deathDuration);
+        Physics2D.gravity = new Vector2(0, -9.8f);
         Application.LoadLevel(Application.loadedLevel);
 	}
 }
