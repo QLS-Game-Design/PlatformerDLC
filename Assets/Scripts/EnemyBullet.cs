@@ -47,7 +47,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "EnemyBullet")
         {
-            Debug.Log(col.gameObject.tag);
+            //Debug.Log(col.gameObject.tag);
             Instantiate(impactEffect, transform.position, transform.rotation);
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player1>().animator.SetBool("IsHurt", false);
             Destroy(this.gameObject);
