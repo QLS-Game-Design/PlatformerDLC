@@ -184,6 +184,10 @@ public class SlimeBoss : MonoBehaviour
         {
             hitGround = true;
         }
+        if (collision.collider.gameObject.tag == "Beam")
+        {
+            TakeDamage(collision.collider.gameObject.GetComponent<Beam>().damage);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

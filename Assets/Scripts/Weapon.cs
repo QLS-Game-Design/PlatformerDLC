@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     public float damageBullet;
     public float damageGrenade;
+    public float damageBeam;
     public GameObject player;
     //Vector2 mousePos;
     public Camera mainCam;
@@ -14,6 +15,7 @@ public class Weapon : MonoBehaviour
     // public Transform firePoint = this;
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
+    public GameObject beamPrefab;
     public GameObject muzzle;
     public bool isFlipped = false;
     public float weaponOffsetIdleX;
@@ -24,35 +26,50 @@ public class Weapon : MonoBehaviour
     public bool shootingBurstOn = false;
     private float timeFromLastShot = 0f;
     public float shotWaitTime = 0.2f;
+    public bool grenadeOn;
+    public bool gunOn = false;
+    public bool beamBurst = false;
     Sprite weaponSprite;
     public Sprite gunSprite;
     public Sprite grenadeSprite;
+    public Sprite beamSprite;
 
     public AudioSource gunFireAudio;
     public AudioSource grenadeFireAudio;
+
+    // enum Gun{
+    //     pistol,
+    //     grenade,
+    //     beam,
+    // }
 
     void Start()
     {
         weaponSprite = GetComponent<SpriteRenderer>().sprite;
         bulletPrefab.GetComponent<Bullet>().damage = StaticTracker.gunDamage;
         grenadePrefab.GetComponent<Grenade>().damage = StaticTracker.grenadeDamage;
+        beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
         gunFireAudio = GameObject.Find("GunFireAudio").GetComponent<AudioSource>();
         grenadeFireAudio = GameObject.Find("GrenadeFireAudio").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Shoot(int k){
-        if (shootingBurstOn){
+        if (shootingBurstOn && weaponSprite == gunSprite){
 
             GameObject clone = Instantiate(bulletPrefab,muzzle.transform.position, muzzle.transform.rotation);
             Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
             clone.GetComponent<Bullet>().speed *= k;
             gunFireAudio.Play();
-        } else {
+        } if(weaponSprite == grenadeSprite)  {
             GameObject clone = Instantiate(grenadePrefab,muzzle.transform.position, muzzle.transform.rotation);
             Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
             clone.GetComponent<Grenade>().speed *= k;
             grenadeFireAudio.Play();
+        } if(weaponSprite == beamSprite && beamBurst){
+            GameObject clone = Instantiate(beamPrefab,muzzle.transform.position, muzzle.transform.rotation);
+            Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
+            clone.GetComponent<Beam>().speed *= k;
         }
     }
     void Update()
@@ -117,7 +134,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetButtonDown("Switch")){
             SwitchWeapon();
         }
-        if (shootingBurstOn){
+        if (shootingBurstOn || beamBurst){
             if (Input.GetButton("Fire1")){
                 if (timeFromLastShot > shotWaitTime){
                     if (mx < 0)
@@ -145,12 +162,31 @@ public class Weapon : MonoBehaviour
         }
     }
     void SwitchWeapon(){
-        shootingBurstOn = !shootingBurstOn;
-        if (shootingBurstOn){
+        
+        if (shootingBurstOn == false && gunOn && grenadeOn == false){
             weaponSprite = gunSprite;
-        } else {
+            grenadeOn = false;
+            gunOn = false;  
+            shotWaitTime = 0.2f;
+            shootingBurstOn = true;
+            beamBurst = false;
+        } 
+        else if(shootingBurstOn && grenadeOn == false && gunOn == false){
             weaponSprite = grenadeSprite;
+            grenadeOn = true;
+            shotWaitTime = 0.2f;
+            shootingBurstOn = false;
+            }
+        else if(grenadeOn && shootingBurstOn == false && gunOn == false) {
+            
+            weaponSprite = beamSprite;
+            grenadeOn = false;
+            shotWaitTime = 0f;
+            gunOn = true;
+            shootingBurstOn = false;
+            beamBurst = true;
+            }
+            
         }
         
     }
-}

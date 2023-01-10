@@ -81,5 +81,9 @@ public class Drone : MonoBehaviour
         {
             flipped = !flipped;
         }
+        if (collision.collider.gameObject.tag == "Beam")
+        {
+            TakeDamage(collision.collider.gameObject.GetComponent<Beam>().damage);
+        }
     }
 }

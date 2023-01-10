@@ -14,6 +14,10 @@ public class StaticTracker : MonoBehaviour
     public static float grenadeDamageCost = 5f;
     public static float grenadeDamageIncrease = 1f;
     public static float grenadeDamageCostIncrease = 5f;
+    public static float beamDamage = 3f;
+    public static float beamDamageCost = 5f;
+    public static float beamDamageIncrease = 1f;
+    public static float beamDamageCostIncrease = 5f;
     public static float maxHealth = 3f;
     public static float healthCost = 10f;
     public static float maxHealthIncrease = 1f;
@@ -35,6 +39,10 @@ public class StaticTracker : MonoBehaviour
         healthCost = 10;
         maxHealthIncrease = 1f;
         healthCostIncrease = 10f;
+        beamDamage = 3f;
+        beamDamageCost = 5f;
+        beamDamageIncrease = 1f;
+        beamDamageCostIncrease = 5f;
     }
 
     // Update is called once per frame

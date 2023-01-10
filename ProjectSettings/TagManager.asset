@@ -16,6 +16,7 @@ TagManager:
   - LevelLoader
   - Lava
   - Web
+  - Beam
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Map
   - Boundary
   - Background
-  - 
+  - BEAM
   - 
   - 
   - 

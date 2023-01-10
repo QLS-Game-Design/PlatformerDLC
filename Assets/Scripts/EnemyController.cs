@@ -73,6 +73,10 @@ public class EnemyController : MonoBehaviour
         {
             TakeDamage(collision.collider.gameObject.GetComponent<Grenade>().damage);
         }
+        if (collision.collider.gameObject.tag == "Beam")
+        {
+            TakeDamage(collision.collider.gameObject.GetComponent<Beam>().damage);
+        }
         if (collision.collider.gameObject.tag == "Enemy")
         {
             flipped = !flipped;
