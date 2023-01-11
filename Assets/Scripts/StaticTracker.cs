@@ -14,9 +14,9 @@ public class StaticTracker : MonoBehaviour
     public static float grenadeDamageCost = 5f;
     public static float grenadeDamageIncrease = 1f;
     public static float grenadeDamageCostIncrease = 5f;
-    public static float beamDamage = 3f;
+    public static float beamDamage = 0.1f;
     public static float beamDamageCost = 5f;
-    public static float beamDamageIncrease = 1f;
+    public static float beamDamageIncrease = 0.3f;
     public static float beamDamageCostIncrease = 5f;
     public static float maxHealth = 3f;
     public static float healthCost = 10f;
