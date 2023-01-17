@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject grenadePrefab;
     public GameObject beamPrefab;
+    public GameObject shotgunPrefab;
     public GameObject muzzle;
     public bool isFlipped = false;
     public float weaponOffsetIdleX;
@@ -33,6 +34,7 @@ public class Weapon : MonoBehaviour
     public Sprite gunSprite;
     public Sprite grenadeSprite;
     public Sprite beamSprite;
+    public Sprite shotgunSprite;
 
     public AudioSource gunFireAudio;
     public AudioSource grenadeFireAudio;
@@ -49,6 +51,7 @@ public class Weapon : MonoBehaviour
         bulletPrefab.GetComponent<Bullet>().damage = StaticTracker.gunDamage;
         grenadePrefab.GetComponent<Grenade>().damage = StaticTracker.grenadeDamage;
         beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
+        //shotgunPrefab.GetComponent<Shotgun>().damage = StaticTracker.beamDamage;
         gunFireAudio = GameObject.Find("GunFireAudio").GetComponent<AudioSource>();
         grenadeFireAudio = GameObject.Find("GrenadeFireAudio").GetComponent<AudioSource>();
     }
@@ -70,6 +73,11 @@ public class Weapon : MonoBehaviour
             GameObject clone = Instantiate(beamPrefab,muzzle.transform.position, muzzle.transform.rotation);
             Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
             clone.GetComponent<Beam>().speed *= k;
+        }
+        if(weaponSprite == shotgunSprite){
+            GameObject clone = Instantiate(shotgunPrefab,muzzle.transform.position, muzzle.transform.rotation);
+            Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
+            clone.GetComponent<Shotgun>().speed *= k;
         }
     }
     void Update()
