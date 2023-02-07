@@ -45,13 +45,16 @@ public class EnemyBullet : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "EnemyBullet")
-        {
-            //Debug.Log(col.gameObject.tag);
-            Instantiate(impactEffect, transform.position, transform.rotation);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player1>().animator.SetBool("IsHurt", false);
-            Destroy(this.gameObject);
-        }
+        //if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "EnemyBullet")
+        //{
+        //    //Debug.Log(col.gameObject.tag);
+        //    Instantiate(impactEffect, transform.position, transform.rotation);
+        //    GameObject.FindGameObjectWithTag("Player").GetComponent<Player1>().animator.SetBool("IsHurt", false);
+        //    Destroy(this.gameObject);
+        //}
 
+        Instantiate(impactEffect, transform.position, transform.rotation);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player1>().animator.SetBool("IsHurt", false);
+        Destroy(this.gameObject);
     }
 }

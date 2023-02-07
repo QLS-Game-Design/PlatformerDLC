@@ -17,6 +17,7 @@ TagManager:
   - Lava
   - Web
   - Beam
+  - Bandage
   layers:
   - Default
   - TransparentFX

@@ -212,6 +212,20 @@ public class Player1 : MonoBehaviour
             speedY = 0.97f;
 
         }
+        if (collision.gameObject.tag == "Bandage")
+        {
+            health -= 1;
+            playerHurtAudio.Play();
+            animator.SetBool("IsHurt", true);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 5);
+        }
+        healthBar.GetComponent<Slider>().value = health / maxHealth;
+        if (health <= 0)
+        {
+            animator.SetBool("IsHurt", false);
+            animator.SetBool("JumpUp", false);
+            StartCoroutine(Die());
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
@@ -220,6 +234,11 @@ public class Player1 : MonoBehaviour
             speed = 5f;
             speedY=1f;
         }
+        if (collision.gameObject.tag == "Bandage")
+        {
+            animator.SetBool("IsHurt", false);
+        }
+
     }
 
     IEnumerator Die()

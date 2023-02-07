@@ -50,7 +50,11 @@ public class Weapon : MonoBehaviour
         weaponSprite = GetComponent<SpriteRenderer>().sprite;
         bulletPrefab.GetComponent<Bullet>().damage = StaticTracker.gunDamage;
         grenadePrefab.GetComponent<Grenade>().damage = StaticTracker.grenadeDamage;
-        beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
+        if (beamPrefab != null)
+        {
+            beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
+        }
+        
         //shotgunPrefab.GetComponent<Shotgun>().damage = StaticTracker.beamDamage;
         gunFireAudio = GameObject.Find("GunFireAudio").GetComponent<AudioSource>();
         grenadeFireAudio = GameObject.Find("GrenadeFireAudio").GetComponent<AudioSource>();
@@ -77,7 +81,7 @@ public class Weapon : MonoBehaviour
         if(weaponSprite == shotgunSprite){
             GameObject clone = Instantiate(shotgunPrefab,muzzle.transform.position, muzzle.transform.rotation);
             Physics2D.IgnoreCollision(clone.GetComponent<Collider2D>(), this.GetComponentInParent<Collider2D>());
-            clone.GetComponent<Shotgun>().speed *= k;
+            // clone.GetComponent<Shotgun>().speed *= k;
         }
     }
     void Update()
@@ -186,14 +190,20 @@ public class Weapon : MonoBehaviour
             shootingBurstOn = false;
             }
         else if(grenadeOn && shootingBurstOn == false && gunOn == false) {
-            
+
             weaponSprite = beamSprite;
             grenadeOn = false;
             shotWaitTime = 0f;
             gunOn = true;
             shootingBurstOn = false;
             beamBurst = true;
+
+            if (beamSprite == null)
+            {
+                SwitchWeapon();
             }
+
+        }
             
         }
         
