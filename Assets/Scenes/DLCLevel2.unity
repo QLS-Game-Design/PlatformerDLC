@@ -17379,7 +17379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e519669e6a2192e4fa8b821fefb0aa9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmountOfParallax: 1
+  AmountOfParallax: -1
   MainCamera: {fileID: 532283416}
 --- !u!4 &1379264447
 Transform:
