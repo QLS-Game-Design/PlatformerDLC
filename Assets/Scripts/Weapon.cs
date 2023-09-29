@@ -49,10 +49,12 @@ public class Weapon : MonoBehaviour
     {
         weaponSprite = GetComponent<SpriteRenderer>().sprite;
         bulletPrefab.GetComponent<Bullet>().damage = StaticTracker.gunDamage;
+
         grenadePrefab.GetComponent<Grenade>().damage = StaticTracker.grenadeDamage;
         if (beamPrefab != null)
         {
-            beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
+        	// beamPrefab.GetComponent<Beam>().damage = StaticTracker.beamDamage;
+            beamPrefab.GetComponent<Beam>().damage = 0.2f;
         }
         
         //shotgunPrefab.GetComponent<Shotgun>().damage = StaticTracker.beamDamage;

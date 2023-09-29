@@ -143,19 +143,20 @@ public class Player1 : MonoBehaviour
             animator.SetBool("JumpUp", false);
         }   else if (collision.collider.gameObject.tag == "Enemy")
         {
-            health-=1;
+            health-=0.2f;
             playerHurtAudio.Play();
             animator.SetBool("IsHurt", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+5);
         } 
         else if (collision.collider.gameObject.tag == "Lava")
         {
-            health-=3;
+            health-=0.5f;
             playerHurtAudio.Play();
             animator.SetBool("IsHurt", true);
         } else if (collision.collider.gameObject.tag == "EnemyBullet")
         {
-            health-=collision.collider.gameObject.GetComponent<EnemyBullet>().damage;
+            // health-=collision.collider.gameObject.GetComponent<EnemyBullet>().damage;
+			health-=0.5f;
             playerHurtAudio.Play();
             animator.SetBool("IsHurt", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y+5);
@@ -214,7 +215,7 @@ public class Player1 : MonoBehaviour
         }
         if (collision.gameObject.tag == "Bandage")
         {
-            health -= 1;
+            health -= 0.3f;
             playerHurtAudio.Play();
             animator.SetBool("IsHurt", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + 5);
